@@ -241,6 +241,9 @@ class TrainLoop:
                 with bf.BlobFile(bf.join(get_blob_logdir(), filename), "wb") as f:
                     th.save(state_dict, f)
 
+            import shutil
+            shutil.copy(bf.join(get_blob_logdir(), filename), "/content/drive/MyDrive/" + filename)
+
         save_checkpoint(0, self.mp_trainer.master_params)
         for rate, params in zip(self.ema_rate, self.ema_params):
             save_checkpoint(rate, params)
